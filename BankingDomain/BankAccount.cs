@@ -4,9 +4,11 @@ using System.Text;
 
 namespace BankingDomain
 {
+    public enum AccountType { Standard, Gold}
     public class BankAccount
     {
         private decimal _balance = 1000;
+        public AccountType Type { get; set; } = AccountType.Standard;
 
         public decimal GetBalance()
         {
@@ -19,7 +21,19 @@ namespace BankingDomain
             {
                 throw new ImproperTransactionException();
             }
-            _balance += amountToDeposit;
+            switch (Type)
+            {
+                case AccountType.Standard:
+                    {
+                        _balance += amountToDeposit;
+                        break;
+                    }
+                case AccountType.Gold:
+                    {
+                        _balance += amountToDeposit * 1.10M;
+                        break;
+                    }
+            }        
         }
 
         public void Withdraw(decimal amountToWithdraw)
