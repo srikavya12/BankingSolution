@@ -13,7 +13,7 @@ namespace BankingDomain
             return _balance;
         }
 
-        public void Deposit(decimal amountToDeposit)
+        public virtual void Deposit(decimal amountToDeposit)
         {
             if (amountToDeposit < 0)
             {
